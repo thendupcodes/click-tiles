@@ -1,30 +1,26 @@
-# React + TypeScript + Vite
+# Click Tiles
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Click Tiles is an interactive web application built using React.js, HTML, SCSS, TypeScript, and Anime.js. It presents a grid of black clickable tiles covering the entire screen. Upon clicking any tile, it triggers a staggered animation effect, removing all tiles from the clicked one and revealing a developer quote atop a scrolling gradient background. Additionally, users can customize the background, which responds to mouse movements in a parallax-like manner.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Interactive Grid:** Clickable tiles covering the entire screen.
+- **Staggered Animation:** Upon clicking a tile, triggers a staggered animation effect to remove tiles from the clicked one.
+- **Developer Quotes:** Reveals developer quotes atop a scrolling gradient background.
+- **Background Customization:** Users can change the background, which responds to mouse movements with a parallax-like effect.
+- **Fullscreen Toggle:** Users can toggle fullscreen mode.
+- **Navigation:** Users can navigate between previous and next quotes (and background images).
+- **Keyboard Shortcuts:** All functions can be performed via keyboard shortcuts.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React.js:** Used for building the interactive components and managing the application state.
+- **HTML:** Markup language for structuring the web page.
+- **SCSS:** Used for styling, providing a more maintainable and structured approach to CSS.
+- **TypeScript:** Adds static typing to JavaScript, enhancing code readability and maintainability.
+- **Anime.js:** Used for creating the stagger animation on the tiles, providing smooth and dynamic effects.
 
-- Configure the top-level `parserOptions` property like this:
+## Usage
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Click on any tile to trigger the animation and reveal a developer quote.
+- Explore the background customization feature by moving your mouse to see the parallax-like effect.
