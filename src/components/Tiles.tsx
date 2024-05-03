@@ -90,10 +90,8 @@ export default function Tiles () {
     })
   }
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Backspace') {
-      navigate("/");
-    } else if (e.key === 'ArrowLeft') {
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'ArrowLeft') {
       handleQuotePrevious();
     } else if (e.key === 'ArrowRight') {
       handleQuoteNext();

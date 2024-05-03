@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 type TileControlsProps = {
   tilesToggled: boolean;
   hideControls: boolean;
@@ -21,24 +19,8 @@ export default function TileControls ({
   toggleBackground,
   toggleFullScreen,
 }: TileControlsProps) {
-  const navigate = useNavigate();
-
   return (
     <div className={`Tiles__footer ${tilesToggled && !hideControls ? 'Tiles__footer--show' : ''} ${slowLoad ? 'Tiles__footer--slow-load' : ''}`}>
-      <div
-        tabIndex={0}
-        role="button"
-        className="Key Key--long Tiles__key-sc"
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') navigate("/")
-        }}
-        onClick={() => navigate("/")}
-      >
-        <div className="Key__icon Tiles__key-sc-icon"><i className="fa-solid fa-delete-left"></i></div>
-        
-        <span className="Key__info Tiles__key-sc-label">go&nbsp;home</span>
-      </div>
-
       <div
         tabIndex={0}
         role="button"
