@@ -1,7 +1,7 @@
 type TileQuotesProps = {
   tilesToggled: boolean;
   fade: boolean;
-  currentQuote: 
+  currentQuote: any;
 }
 
 export default function TileQuotes ({
