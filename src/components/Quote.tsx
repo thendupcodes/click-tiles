@@ -1,14 +1,17 @@
 type TileQuotesProps = {
   tilesToggled: boolean;
   fade: boolean;
-  currentQuote: any;
+  currentQuote: {
+    quote: string,
+    author: string,
+  };
 }
 
 export default function TileQuotes ({
   tilesToggled,
   fade,
   currentQuote,
-}) {
+}: TileQuotesProps) {
   return (
     <div className={`Tiles__body ${tilesToggled ? 'Tiles__body--show' : ''}`}>
       <div className={`Tiles__body-quote ${fade ? 'Tiles__body-quote--fade' : ''}`}>
