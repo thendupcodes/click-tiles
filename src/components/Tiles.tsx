@@ -1,12 +1,11 @@
 import anime from "animejs";
-import { useNavigate } from 'react-router-dom';
+import { CSSProperties, useEffect, useMemo, useState } from "react";
 
-import TilesBackground from "@/components/tiles/Background";
-import TileControls from "@/components/tiles/Controls";
-import TileQuotes from "@/components/tiles/Quotes";
+import TilesBackground from "@/components/Background";
+import TileControls from "@/components/Controls";
+import TileQuotes from "@/components/Quote";
 
 import { useResizer } from "@/hooks/useResizer";
-import { useEffect, useMemo, useState } from "react";
 
 import imageUrls from '@/constants/images.json';
 import quotes from '@/constants/quotes.json';
@@ -15,9 +14,12 @@ import mod from '@/helpers/mod';
 import toggleFullScreen from '@/helpers/toggleFullScreen';
 import useThrottle from '@/hooks/useThrottle';
 
-export default function Tiles () {
-  const navigate = useNavigate();
+interface ModifiedCSSProperties extends CSSProperties {
+  '--columns': string | number,
+  '--rows': string | number,
+} 
 
+export default function Tiles () {
   const [tilesToggled, setTilesToggled] = useState(false);
   const [backgroundToggled, setBackgroundToggled] = useState(false);
   const [slowLoad, setSlowLoad] = useState(false);
@@ -35,8 +37,11 @@ export default function Tiles () {
     return [Math.floor(windowWidth / 30), Math.floor(windowHeight / 30)];
   }, [windowWidth, windowHeight])
 
-  const style = useMemo(() => {
-    return { '--columns': cols, '--rows': rows };
+  const style: ModifiedCSSProperties= useMemo(() => {
+    return {
+      '--columns': cols,
+      '--rows': rows
+    };
   }, [cols, rows])
 
   const handleQuoteNext = useThrottle(() => {
@@ -104,7 +109,7 @@ export default function Tiles () {
     }
   };
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: MouseEvent) => {
     const imageX = ((e.clientX / windowWidth) - 0.5) * 20;
     const imageY = ((e.clientY / windowHeight) - 0.5) * 20;
 
@@ -134,7 +139,7 @@ export default function Tiles () {
 
       <div className={`Tiles__main ${tilesToggled ? 'Tiles__main--toggled' : ''} ${!backgroundToggled ? 'Tiles__main--gradient' : ''}`}>
         {
-          Array.from(Array(cols * rows)).map((n, i) => {
+          Array.from(Array(cols * rows)).map((_, i) => {
             return <div key={`tile_${i}`} className="Tile" onClick={() => handleOnClick(i)}></div>
           })
         }
