@@ -21,7 +21,7 @@
     /* Linting */
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
+    "strict": true,
     "noImplicitThis": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
