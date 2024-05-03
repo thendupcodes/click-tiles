@@ -1,0 +1,236 @@
+$c1: #005f73;
+$c2: #0a9396;
+$c3: #94d2bd;
+$c4: #ee9b00;
+$c5: #ca6702;
+$c6: #bb3e03;
+$c7: #ae2012;
+
+.Tiles {
+  height: 100vh;
+  width: 100vw;
+  cursor: pointer;
+
+  &__background {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+
+    &-image {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      transition: opacity 0.7s linear;
+      -webkit-filter: blur(4px);
+      -moz-filter: blur(4px);
+      -o-filter: blur(4px);
+      -ms-filter: blur(4px);
+      filter: blur(4px);
+      background-size: 120%;
+    }
+
+    &-overlay {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: #000000;
+      opacity: 0.4;
+    }
+  }
+  
+  &__main {
+    height: 100%;
+    display: grid;
+    grid-template-rows: repeat(var(--rows), 1fr);
+    grid-template-columns: repeat(var(--columns), 1fr);
+    animation: slide 20s linear infinite;
+
+    &--gradient {
+      background: linear-gradient(
+        to right,
+        $c1,
+        $c2,
+        $c4,
+        $c5,
+        $c6,
+        $c7,
+        $c1,
+      );
+      background-size: 200%;
+    }
+
+    &--toggled {
+      .Tile {
+        opacity: 0;
+      }
+    }
+  }
+
+  &__body {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.7s linear;
+    font-size: 50px;
+    color: $body-color;
+    user-select: none;
+    pointer-events: none;
+
+    &--show {
+      opacity: 1;
+      transition-delay: 0.7s;
+    }
+
+    &-quote {
+      max-width: 60%;
+      transition: opacity 0.7s linear;
+
+      &--fade {
+        opacity: 0;
+      }
+
+      &-text {
+        font-size: $font-size-subheading;
+        font-family: "Sacramento";
+      }
+
+      &-author {
+        display: flex;
+        font-family: "Bebas Neue";
+        justify-content: end;
+        font-size: $font-size-xxl;
+      }
+    }
+  }
+
+  &__key {
+    &-sc {
+      margin: 0 16px;
+      user-select: none;
+
+      &:hover {
+        .Tiles__key-sc {
+          &-icon {
+            background-color: transparentize($body-color, 0.3);
+          }
+
+          &-label {
+            color: $white;
+          }
+        }
+      }
+    }
+
+    &-sc-icon {
+      background-color: transparentize($body-color, 0.7);
+      color: $white;
+    }
+
+    &-sc-label {
+      color: transparentize($body-color, 0.3);
+    }
+  }
+
+  &__footer {
+    display: flex;
+    opacity: 0;
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 0.7s linear;
+    pointer-events: none;
+
+    &--slow-load {
+      transition-delay: 2s;
+    }
+
+    &--show {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+}
+
+.Tile {
+  position: relative;
+
+  &:before {
+    background-color: $black;
+    content: "";
+    position: absolute;
+    inset: 1px;
+    transition: opacity 1.5s ease-out;
+  }
+
+  &:hover {
+    opacity: 0.7 !important;
+
+    &:before {
+      border-radius: 4px;
+      opacity: 0.1;
+      transition: opacity 0s linear;
+    }
+  }
+}
+
+@media screen and (max-width: $tablet-width) {
+  .Tiles {
+    &__body-quote {
+      max-width: 80%;
+
+      &-text {
+        font-size: 40px;
+      }
+
+      &-author {
+        font-size: 30px;
+      }
+    }
+
+    &__footer {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 8px;
+    }
+  }
+}
+
+@media screen and (max-width: $small-device-width) {
+  .Tiles {
+    &__body-quote {
+      &-text {
+        font-size: 30px;
+      }
+
+      &-author {
+        font-size: 20px;
+      }
+    }
+
+    &__key-sc {
+      &-icon {
+        width: 15px !important;
+        height: 15px;
+        font-size: 12px;
+      }
+
+      &-label {
+        font-size: 12px;
+      }
+    }
+
+    &__footer {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 2px;
+    }
+  }
+}
