@@ -112,6 +112,7 @@ $c7: #ae2012;
 
   &__footer {
     display: flex;
+    flex-direction: column;
     opacity: 0;
     position: absolute;
     bottom: 24px;
@@ -119,6 +120,19 @@ $c7: #ae2012;
     transform: translateX(-50%);
     transition: opacity 0.7s linear;
     pointer-events: none;
+
+    &-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 24px;
+      font-weight: $font-weight-medium;
+      color: transparentize($white, 0.3);
+    }
+
+    &-controls {
+      display: flex;
+    }
 
     &--slow-load {
       transition-delay: 2s;
@@ -139,15 +153,17 @@ $c7: #ae2012;
     content: "";
     position: absolute;
     inset: 1px;
-    transition: opacity 1.5s ease-out;
+    transition: opacity 1s ease-out, border 0.3s ease;
+    border-radius: 8px;
   }
 
-  &:hover {
+  &--highlight {
     opacity: 0.7 !important;
+    border: 2px solid transparent;
 
     &:before {
-      border-radius: 4px;
-      opacity: 0.1;
+      border-radius: 8px;
+      opacity: 0.3;
       transition: opacity 0s linear;
     }
   }
@@ -175,26 +191,30 @@ $c7: #ae2012;
 
     &__footer {
       width: 90%;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      gap: 2px;
 
-      .Tiles__key-sc {
-        &--previous,
-        &--background {
-          flex-direction: row;
-          justify-self: start;
-        }
+      &-controls {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 2px;
 
-        &--hide {
-          display: none;
-        }
+        .Tiles__key-sc {
+          &--previous,
+          &--background {
+            flex-direction: row;
+            justify-self: start;
+          }
 
-        &--next,
-        &--fullscreen {
-          justify-self: end;
-          flex-direction: row-reverse;
+          &--hide {
+            display: none;
+          }
+
+          &--next,
+          &--fullscreen {
+            justify-self: end;
+            flex-direction: row-reverse;
+          }
         }
       }
     }
