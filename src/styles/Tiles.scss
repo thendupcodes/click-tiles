@@ -153,7 +153,7 @@ $c7: #ae2012;
     content: "";
     position: absolute;
     inset: 1px;
-    transition: opacity 1.5s ease-out;
+    transition: opacity 1s ease-out, border 0.3s ease;
     border-radius: 8px;
   }
 
@@ -163,7 +163,7 @@ $c7: #ae2012;
 
     &:before {
       border-radius: 8px;
-      opacity: 0.1;
+      opacity: 0.3;
       transition: opacity 0s linear;
     }
   }

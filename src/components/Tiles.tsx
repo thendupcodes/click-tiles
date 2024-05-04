@@ -119,7 +119,7 @@ export default function Tiles () {
     hightlightTile(tileIdx);
 
     shuffleArray(neighbours)
-      .slice(0,1)
+      .slice(0,2)
       .forEach((nIdx) => {
         hightlightTile(nIdx);
       })
