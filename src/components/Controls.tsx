@@ -24,7 +24,7 @@ export default function TileControls ({
       <div
         tabIndex={0}
         role="button"
-        className="Key Tiles__key-sc"
+        className="Key Tiles__key-sc Tiles__key-sc--previous"
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') handleQuotePrevious()
         }}
@@ -38,7 +38,7 @@ export default function TileControls ({
       <div
         tabIndex={0}
         role="button"
-        className="Key Tiles__key-sc"
+        className="Key Tiles__key-sc Tiles__key-sc--next"
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') handleQuoteNext()
         }}
@@ -52,7 +52,7 @@ export default function TileControls ({
       <div
         tabIndex={0}
         role="button"
-        className="Key Tiles__key-sc"
+        className="Key Tiles__key-sc Tiles__key-sc--background"
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') toggleBackground()
         }}
@@ -66,21 +66,7 @@ export default function TileControls ({
       <div
         tabIndex={0}
         role="button"
-        className="Key Tiles__key-sc"
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') toggleFullScreen()
-        }}
-        onClick={() => toggleFullScreen()}
-      >
-        <div className="Key__icon Tiles__key-sc-icon"><i className="fa-solid fa-f"></i></div>
-        
-        <span className="Key__info Tiles__key-sc-label">fullscreen</span>
-      </div>
-
-      <div
-        tabIndex={0}
-        role="button"
-        className="Key Tiles__key-sc"
+        className="Key Tiles__key-sc Tiles__key-sc--hide"
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') toggleControls()
         }}
@@ -89,6 +75,20 @@ export default function TileControls ({
         <div className="Key__icon Tiles__key-sc-icon"><i className="fa-solid fa-h"></i></div>
         
         <span className="Key__info Tiles__key-sc-label">hide</span>
+      </div>
+
+      <div
+        tabIndex={0}
+        role="button"
+        className="Key Tiles__key-sc Tiles__key-sc--fullscreen"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') toggleFullScreen()
+        }}
+        onClick={() => toggleFullScreen()}
+      >
+        <div className="Key__icon Tiles__key-sc-icon"><i className="fa-solid fa-f"></i></div>
+        
+        <span className="Key__info Tiles__key-sc-label">fullscreen</span>
       </div>
     </div>
   );

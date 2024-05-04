@@ -9,6 +9,7 @@ import { useResizer } from "@/hooks/useResizer";
 
 import imageUrls from '@/constants/images.json';
 import quotes from '@/constants/quotes.json';
+import vImageUrls from '@/constants/v_images.json';
 
 import mod from '@/helpers/mod';
 import toggleFullScreen from '@/helpers/toggleFullScreen';
@@ -37,6 +38,14 @@ export default function Tiles () {
     return [Math.floor(windowWidth / 30), Math.floor(windowHeight / 30)];
   }, [windowWidth, windowHeight])
 
+  const urls = useMemo(() => {
+    if (windowWidth < 854) {
+      return vImageUrls;
+    } else {
+      return imageUrls;
+    }
+  }, [windowWidth])
+
   const style: ModifiedCSSProperties= useMemo(() => {
     return {
       '--columns': cols,
@@ -50,7 +59,7 @@ export default function Tiles () {
     setTimeout(() => {
       setFade(false);
       setQuoteIdx((prev) => mod((prev + 1), quotes.length));
-      setImageIdx((prev) => mod((prev + 1), imageUrls.length));
+      setImageIdx((prev) => mod((prev + 1), urls.length));
     }, 600);
   }, 1000, false);
 
@@ -60,7 +69,7 @@ export default function Tiles () {
     setTimeout(() => {
       setFade(false);
       setQuoteIdx((prev) => mod((prev - 1), quotes.length));
-      setImageIdx((prev) => mod((prev - 1), imageUrls.length));
+      setImageIdx((prev) => mod((prev - 1), urls.length));
     }, 600);
   }, 1000, false);
 
@@ -132,6 +141,7 @@ export default function Tiles () {
   return (
     <div className="Tiles" style={style}>
       <TilesBackground
+        urls={urls}
         imageIdx={imageIdx}
         imagePosition={imagePosition}
         backgroundToggled={backgroundToggled}
