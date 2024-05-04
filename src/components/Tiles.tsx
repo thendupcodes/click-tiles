@@ -12,7 +12,9 @@ import quotes from '@/constants/quotes.json';
 import vImageUrls from '@/constants/v_images.json';
 
 import mod from '@/helpers/mod';
+import shuffleArray from "@/helpers/shuffleArray";
 import toggleFullScreen from '@/helpers/toggleFullScreen';
+import useRefsFromArray from "@/hooks/useRefsFromArray";
 import useThrottle from '@/hooks/useThrottle';
 
 interface ModifiedCSSProperties extends CSSProperties {
@@ -37,6 +39,10 @@ export default function Tiles () {
   const [cols, rows] = useMemo(() => {
     return [Math.floor(windowWidth / 30), Math.floor(windowHeight / 30)];
   }, [windowWidth, windowHeight])
+
+  const totalTiles = cols * rows;
+
+  const tilesRef = useRefsFromArray(Array.from(Array(totalTiles)));
 
   const urls = useMemo(() => {
     if (windowWidth < 854) {
@@ -79,6 +85,44 @@ export default function Tiles () {
 
   const toggleBackground = () => {
     setBackgroundToggled((prev) => !prev);
+  }
+
+  const hightlightTile = (idx: number) => {
+    const tile = tilesRef.current?.[idx]?.current;
+    if (tile == null) return;
+
+    tile?.classList.add('Tile--highlight');
+
+    setTimeout(() => {
+      tile?.classList.remove('Tile--highlight')
+    }, 700)
+  }
+
+  const highlightNeighbours = (tileIdx: number) => {
+    const neighbours = [
+      tileIdx - 1,
+      tileIdx + 1,
+      tileIdx - cols,
+      tileIdx + cols,
+      tileIdx - cols - 1,
+      tileIdx - cols + 1,
+      tileIdx + cols - 1,
+      tileIdx + cols + 1,
+    ].filter((x) => {
+      return (
+        x >= 0 && // tile is not less than 0
+        x < (cols * rows) && // tile is not more than total
+        Math.abs((x % cols) - (tileIdx % cols)) <= 1 // tile is not wrapped
+      );
+    });
+    
+    hightlightTile(tileIdx);
+
+    shuffleArray(neighbours)
+      .slice(0,1)
+      .forEach((nIdx) => {
+        hightlightTile(nIdx);
+      })
   }
 
   const handleOnClick = (idx: number) => {
@@ -149,8 +193,8 @@ export default function Tiles () {
 
       <div className={`Tiles__main ${tilesToggled ? 'Tiles__main--toggled' : ''} ${!backgroundToggled ? 'Tiles__main--gradient' : ''}`}>
         {
-          Array.from(Array(cols * rows)).map((_, i) => {
-            return <div key={`tile_${i}`} className="Tile" onClick={() => handleOnClick(i)}></div>
+          Array.from(Array(totalTiles)).map((_, i) => {
+            return <div ref={tilesRef.current[i]} key={`tile_${i}`} className="Tile" onMouseOver={() => highlightNeighbours(i)} onClick={() => handleOnClick(i)}></div>
           })
         }
       </div>
