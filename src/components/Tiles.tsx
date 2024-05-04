@@ -140,6 +140,10 @@ export default function Tiles () {
 
     anime({
       targets: ".Tile",
+      scale: [
+        {value: 0.7, easing: 'easeOutSine', duration: 500},
+        {value: 1, easing: 'easeInOutQuad', duration: 300}
+      ],
       opacity: tilesToggled ? 1 : 0,
       delay: anime.stagger(25, {
         grid: [cols, rows],
