@@ -140,13 +140,15 @@ $c7: #ae2012;
     position: absolute;
     inset: 1px;
     transition: opacity 1.5s ease-out;
+    border-radius: 8px;
   }
 
-  &:hover {
+  &--highlight {
     opacity: 0.7 !important;
+    border: 2px solid transparent;
 
     &:before {
-      border-radius: 4px;
+      border-radius: 8px;
       opacity: 0.1;
       transition: opacity 0s linear;
     }
