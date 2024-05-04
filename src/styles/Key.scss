@@ -1,27 +1,46 @@
 .Key {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   user-select: none;
+  min-width: 40px;
+  margin: 0 16px;
 
-  &--long {
-    .Key__icon {
-      width: 24px;
+  &:hover {
+    .Key {
+      &__icon {
+        background-color: transparentize($body-color, 0.3);
+      }
+
+      &__info {
+        color: $white;
+      }
     }
   }
 
   &__icon {
-    width: 14px;
+    min-width: 24px;
     font-family: $font-family-regular;
     font-size: $font-size-sm;
     padding: 4px 8px;
     border-radius: $border-radius-box-small;
     text-align: center;
     font-weight: $font-weight-regular;
+    background-color: transparentize($body-color, 0.7);
+    color: $white;
   }
 
   &__info {
-    color: #323437;
-    margin-left: 8px;
+    color: transparentize($white, 0.3);
+    margin: 4px 8px;
     font-weight: $font-weight-medium;
+  }
+}
+
+@media screen and (max-width: $small-device-width) {
+  .Key {
+    justify-content: flex-start;
+    margin: 8px 24px !important;
   }
 }
