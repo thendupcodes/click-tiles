@@ -1,8 +1,7 @@
 import { createRef, useRef } from 'react';
 
-import imageUrls from '@/constants/images.json';
-
 type TilesBackgroundProps = {
+  urls: string[];
   imageIdx: number;
   imagePosition: { x: number, y: number };
   backgroundToggled: boolean;
@@ -21,17 +20,18 @@ const useRefsFromArray = <T extends string>(array: T[]) => {
 };
 
 export default function TilesBackground ({
+  urls,
   imageIdx,
   imagePosition,
   backgroundToggled
 }: TilesBackgroundProps) {
-  const imageRefs = useRefsFromArray(imageUrls);
+  const imageRefs = useRefsFromArray(urls);
   
   return (
     <div className="Tiles__background" style={{
       opacity: backgroundToggled ? 1 : 0
     }}>
-      {imageUrls.map((url, idx) => {
+      {urls.map((url, idx) => {
         const imageRef = imageRefs?.current[idx];
 
         if (imageRef != null) {
@@ -42,7 +42,7 @@ export default function TilesBackground ({
 
         return (
           <div ref={imageRef} key={url} className="Tiles__background-image" style={{
-            backgroundImage: `url(${imageUrls[idx]})`,
+            backgroundImage: `url(${urls[idx]})`,
             opacity: idx === imageIdx ? 1 : 0,
           }}></div>
         );
