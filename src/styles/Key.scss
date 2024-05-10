@@ -15,6 +15,22 @@
     }
   }
 
+  &--show {
+    .Key__icon {
+      color: transparentize($white, 0.7);
+      background: transparent;
+    }
+
+    &:hover {
+      .Key {
+        &__icon {
+          color: $white;
+          background-color: transparentize($body-color, 0.3);
+        }
+      }
+    }
+  }
+
   &__icon {
     min-width: 24px;
     font-family: $font-family-regular;

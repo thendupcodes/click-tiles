@@ -8,8 +8,8 @@
     position: absolute;
     border-radius: 8px;
     padding: 4px 8px;
-    background: var(--tooltip-bg-color);
-    color: var(--tooltip-ft-color);
+    background: $black;
+    color: $white;
     min-width: 60px;
     width: fit-content;
     text-wrap: nowrap;
@@ -46,7 +46,7 @@
         top: 100%;
         left: 50%;
         transform: translateX(-50%);
-        border-color: var(--tooltip-bg-color) transparent transparent transparent;
+        border-color: $black transparent transparent transparent;
       }
     }
 
@@ -59,7 +59,7 @@
         top: 50%;
         left: 100%;
         transform: translateY(-50%);
-        border-color: transparent transparent transparent var(--tooltip-bg-color);
+        border-color: transparent transparent transparent $black;
       }
     }
 
@@ -72,7 +72,7 @@
         top: 0%;
         left: 50%;
         transform: translate(-50%, -100%);
-        border-color: transparent transparent var(--tooltip-bg-color) transparent;
+        border-color: transparent transparent $black transparent;
       }
     }
 
@@ -85,7 +85,7 @@
         top: 50%;
         left: 0;
         transform: translate(-100%, -50%);
-        border-color: transparent var(--tooltip-bg-color) transparent transparent;
+        border-color: transparent $black transparent transparent;
       }
     }
 
@@ -98,7 +98,7 @@
         top: 100%;
         left: 75%;
         transform: translateX(-50%);
-        border-color: var(--tooltip-bg-color) transparent transparent transparent;
+        border-color: $black transparent transparent transparent;
       }
     }
 
@@ -111,7 +111,7 @@
         top: 100%;
         left: 25%;
         transform: translateX(-50%);
-        border-color: var(--tooltip-bg-color) transparent transparent transparent;
+        border-color: $black transparent transparent transparent;
       }
     }
 
@@ -124,7 +124,7 @@
         top: 0%;
         left: 75%;
         transform: translate(-50%, -100%);
-        border-color: transparent transparent var(--tooltip-bg-color) transparent;
+        border-color: transparent transparent $black transparent;
       }
     }
 
@@ -137,7 +137,7 @@
         top: 0%;
         left: 25%;
         transform: translate(-50%, -100%);
-        border-color: transparent transparent var(--tooltip-bg-color) transparent;
+        border-color: transparent transparent $black transparent;
       }
     }
   }
