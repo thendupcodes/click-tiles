@@ -21,8 +21,6 @@ export default function TileControls ({
 }: TileControlsProps) {
   return (
     <div className={`Tiles__footer ${tilesToggled && !hideControls ? 'Tiles__footer--show' : ''} ${slowLoad ? 'Tiles__footer--slow-load' : ''}`}>
-      <div className="Tiles__footer-info">Keyboard shortcuts</div>
-
       <div className="Tiles__footer-controls">
         <div
           tabIndex={0}
@@ -34,8 +32,6 @@ export default function TileControls ({
           onClick={() => handleQuotePrevious()}
         >
           <div className="Key__icon Tiles__key-sc-icon"><i className="fa-solid fa-caret-left" /></div>
-          
-          <span className="Key__info Tiles__key-sc-label">previous</span>
         </div>
 
         <div
@@ -48,8 +44,6 @@ export default function TileControls ({
           onClick={() => handleQuoteNext()}
         >
           <div className="Key__icon Tiles__key-sc-icon"><i className="fa-solid fa-caret-right" /></div>
-          
-          <span className="Key__info Tiles__key-sc-label">next</span>
         </div>
 
         <div
@@ -61,9 +55,7 @@ export default function TileControls ({
           }}
           onClick={() => toggleBackground()}
         >
-          <div className="Key__icon Tiles__key-sc-icon"><i className="fa-solid fa-b"></i></div>
-          
-          <span className="Key__info Tiles__key-sc-label">background</span>
+          <div className="Key__icon Tiles__key-sc-icon"><i className="fa-solid fa-images"></i></div>
         </div>
 
         <div
@@ -75,9 +67,7 @@ export default function TileControls ({
           }}
           onClick={() => toggleFullScreen()}
         >
-          <div className="Key__icon Tiles__key-sc-icon"><i className="fa-solid fa-f"></i></div>
-          
-          <span className="Key__info Tiles__key-sc-label">fullscreen</span>
+          <div className="Key__icon Tiles__key-sc-icon"><i className="fa-solid fa-expand"></i></div>
         </div>
 
         <div
@@ -89,9 +79,7 @@ export default function TileControls ({
           }}
           onClick={() => toggleControls()}
         >
-          <div className="Key__icon Tiles__key-sc-icon"><i className="fa-solid fa-h"></i></div>
-          
-          <span className="Key__info Tiles__key-sc-label">hide</span>
+          <div className="Key__icon Tiles__key-sc-icon"><i className="fa-solid fa-eye-slash"></i></div>
         </div>
       </div>
     </div>

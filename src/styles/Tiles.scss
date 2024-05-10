@@ -121,15 +121,6 @@ $c7: #ae2012;
     transition: opacity 0.7s linear;
     pointer-events: none;
 
-    &-info {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 24px;
-      font-weight: $font-weight-medium;
-      color: transparentize($white, 0.3);
-    }
-
     &-controls {
       display: flex;
     }
