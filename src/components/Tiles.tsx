@@ -157,12 +157,6 @@ export default function Tiles () {
       handleQuotePrevious();
     } else if (e.key === 'ArrowRight') {
       handleQuoteNext();
-    } else if (e.key === 'b') {
-      toggleBackground();
-    } else if (e.key === 'f') {
-      toggleFullScreen();
-    } else if (e.key === 'h') {
-      toggleControls();
     }
   };
 

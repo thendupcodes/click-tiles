@@ -199,11 +199,16 @@ $c7: #ae2012;
         grid-template-rows: repeat(2, 1fr);
         gap: 2px;
 
-        .Tiles__key-sc {
+        .Tiles__footer-control {
           &--previous,
           &--background {
-            flex-direction: row;
-            justify-self: start;
+            display: flex;
+            justify-content: start;
+
+            .Key {
+              flex-direction: row;
+              justify-self: start;
+            }
           }
 
           &--hide {
@@ -212,8 +217,13 @@ $c7: #ae2012;
 
           &--next,
           &--fullscreen {
-            justify-self: end;
-            flex-direction: row-reverse;
+            display: flex;
+            justify-content: end;
+
+            .Key {
+              justify-self: end;
+              flex-direction: row-reverse;
+            }
           }
         }
       }

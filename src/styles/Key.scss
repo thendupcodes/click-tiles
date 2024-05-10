@@ -19,6 +19,22 @@
     }
   }
 
+  &--show {
+    .Key__icon {
+      color: transparentize($white, 0.7);
+      background: transparent;
+    }
+
+    &:hover {
+      .Key {
+        &__icon {
+          color: $white;
+          background-color: transparentize($body-color, 0.3);
+        }
+      }
+    }
+  }
+
   &__icon {
     min-width: 24px;
     font-family: $font-family-regular;
@@ -36,6 +52,7 @@
     margin: 4px 8px;
     font-size: $font-size-sm;
     font-weight: $font-weight-medium;
+    display: none;
   }
 }
 
@@ -43,5 +60,9 @@
   .Key {
     justify-content: flex-start;
     margin: 8px 24px !important;
+
+    &__info {
+      display: block;
+    }
   }
 }
