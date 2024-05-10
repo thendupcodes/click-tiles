@@ -142,3 +142,9 @@
     }
   }
 }
+
+@media screen and (max-width: $small-device-width) {
+  .Tooltip__tooltip {
+    display: none;
+  }
+}
