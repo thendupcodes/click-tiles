@@ -179,6 +179,9 @@ $c7: #ae2012;
 
 @media screen and (max-width: $small-device-width) {
   .Tiles {
+    height: 100dvh;
+    width: 100dvw;
+
     &__body-quote {
       &-text {
         font-size: 35px;
