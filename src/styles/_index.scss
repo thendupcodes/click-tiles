@@ -8,27 +8,27 @@
 @import './Tooltip';
 
 :root {
-  font-family: $font-family-regular;
-  line-height: 1.5;
-  font-weight: $font-weight-regular;
+	font-family: $font-family-regular;
+	line-height: 1.5;
+	font-weight: $font-weight-regular;
 
-  color-scheme: light dark;
-  color: $body-color;
-  background-color: $dark-gray;
+	color-scheme: light dark;
+	color: $body-color;
+	background-color: $dark-gray;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 * {
-  font-family: $font-family-regular;
+	font-family: $font-family-regular;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  min-width: 320px;
-  min-height: 100dvh;
+	margin: 0;
+	display: flex;
+	min-width: 320px;
+	min-height: 100dvh;
 }
