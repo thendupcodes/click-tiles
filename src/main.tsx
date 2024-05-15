@@ -1,9 +1,7 @@
-import '@/styles/_index.scss'
+import '@/styles/_index.scss';
 
-import ReactDOM from 'react-dom/client'
+import ReactDOM from 'react-dom/client';
 
-import Tiles from '@/components/Tiles.tsx'
+import Tiles from '@/components/Tiles.tsx';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <Tiles />
-)
+ReactDOM.createRoot(document.getElementById('root')!).render(<Tiles />);

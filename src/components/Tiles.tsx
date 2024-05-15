@@ -1,218 +1,240 @@
-import anime from "animejs";
-import { CSSProperties, useEffect, useMemo, useState } from "react";
+import anime from 'animejs';
+import { CSSProperties, useEffect, useMemo, useState } from 'react';
 
-import TilesBackground from "@/components/Background";
-import TileControls from "@/components/Controls";
-import TileQuotes from "@/components/Quote";
+import TilesBackground from '@/components/Background';
+import TileControls from '@/components/Controls';
+import TileQuotes from '@/components/Quote';
 
-import { useResizer } from "@/hooks/useResizer";
+import { useResizer } from '@/hooks/useResizer';
 
 import imageUrls from '@/constants/images.json';
 import quotes from '@/constants/quotes.json';
 import vImageUrls from '@/constants/v_images.json';
 
 import mod from '@/helpers/mod';
-import shuffleArray from "@/helpers/shuffleArray";
+import shuffleArray from '@/helpers/shuffleArray';
 import toggleFullScreen from '@/helpers/toggleFullScreen';
-import useRefsFromArray from "@/hooks/useRefsFromArray";
+import useRefsFromArray from '@/hooks/useRefsFromArray';
 import useThrottle from '@/hooks/useThrottle';
 
 interface ModifiedCSSProperties extends CSSProperties {
-  '--columns': string | number,
-  '--rows': string | number,
-} 
+	'--columns': string | number;
+	'--rows': string | number;
+}
 
-export default function Tiles () {
-  const [tilesToggled, setTilesToggled] = useState(false);
-  const [backgroundToggled, setBackgroundToggled] = useState(false);
-  const [slowLoad, setSlowLoad] = useState(false);
-  const [hideControls, setHideControls] = useState(false);
-  const [fade, setFade] = useState(false);
-  const [quoteIdx, setQuoteIdx] = useState(Math.floor(Math.random() * quotes.length));
-  const [imageIdx, setImageIdx] = useState(Math.floor(Math.random() * imageUrls.length));
-  const [imagePosition, setImagePosition] = useState({ x: 50, y: 50 });
+export default function Tiles() {
+	const [tilesToggled, setTilesToggled] = useState(false);
+	const [backgroundToggled, setBackgroundToggled] = useState(false);
+	const [slowLoad, setSlowLoad] = useState(false);
+	const [hideControls, setHideControls] = useState(false);
+	const [fade, setFade] = useState(false);
+	const [quoteIdx, setQuoteIdx] = useState(
+		Math.floor(Math.random() * quotes.length)
+	);
+	const [imageIdx, setImageIdx] = useState(
+		Math.floor(Math.random() * imageUrls.length)
+	);
+	const [imagePosition, setImagePosition] = useState({ x: 50, y: 50 });
 
-  const { windowWidth, windowHeight } = useResizer();
+	const { windowWidth, windowHeight } = useResizer();
 
-  const currentQuote = useMemo(() => quotes[quoteIdx], [quoteIdx]);
+	const currentQuote = useMemo(() => quotes[quoteIdx], [quoteIdx]);
 
-  const [cols, rows] = useMemo(() => {
-    return [Math.floor(windowWidth / 30), Math.floor(windowHeight / 30)];
-  }, [windowWidth, windowHeight])
+	const [cols, rows] = useMemo(() => {
+		return [Math.floor(windowWidth / 30), Math.floor(windowHeight / 30)];
+	}, [windowWidth, windowHeight]);
 
-  const totalTiles = cols * rows;
+	const totalTiles = cols * rows;
 
-  const tilesRef = useRefsFromArray(Array.from(Array(totalTiles)));
+	const tilesRef = useRefsFromArray(Array.from(Array(totalTiles)));
 
-  const urls = useMemo(() => {
-    if (windowWidth < 854) {
-      return vImageUrls;
-    } else {
-      return imageUrls;
-    }
-  }, [windowWidth])
+	const urls = useMemo(() => {
+		if (windowWidth < 854) {
+			return vImageUrls;
+		} else {
+			return imageUrls;
+		}
+	}, [windowWidth]);
 
-  const style: ModifiedCSSProperties= useMemo(() => {
-    return {
-      '--columns': cols,
-      '--rows': rows
-    };
-  }, [cols, rows])
+	const style: ModifiedCSSProperties = useMemo(() => {
+		return {
+			'--columns': cols,
+			'--rows': rows,
+		};
+	}, [cols, rows]);
 
-  const handleQuoteNext = useThrottle(() => {
-    setFade(true);
+	const handleQuoteNext = useThrottle(
+		() => {
+			setFade(true);
 
-    setTimeout(() => {
-      setFade(false);
-      setQuoteIdx((prev) => mod((prev + 1), quotes.length));
-      setImageIdx((prev) => mod((prev + 1), urls.length));
-    }, 600);
-  }, 1000, false);
+			setTimeout(() => {
+				setFade(false);
+				setQuoteIdx((prev) => mod(prev + 1, quotes.length));
+				setImageIdx((prev) => mod(prev + 1, urls.length));
+			}, 600);
+		},
+		1000,
+		false
+	);
 
-  const handleQuotePrevious = useThrottle(() => {
-    setFade(true);
+	const handleQuotePrevious = useThrottle(
+		() => {
+			setFade(true);
 
-    setTimeout(() => {
-      setFade(false);
-      setQuoteIdx((prev) => mod((prev - 1), quotes.length));
-      setImageIdx((prev) => mod((prev - 1), urls.length));
-    }, 600);
-  }, 1000, false);
+			setTimeout(() => {
+				setFade(false);
+				setQuoteIdx((prev) => mod(prev - 1, quotes.length));
+				setImageIdx((prev) => mod(prev - 1, urls.length));
+			}, 600);
+		},
+		1000,
+		false
+	);
 
-  const toggleControls = () => {
-    setHideControls((prev) => !prev);
-  }
+	const toggleControls = () => {
+		setHideControls((prev) => !prev);
+	};
 
-  const toggleBackground = () => {
-    setBackgroundToggled((prev) => !prev);
-  }
+	const toggleBackground = () => {
+		setBackgroundToggled((prev) => !prev);
+	};
 
-  const hightlightTile = (idx: number) => {
-    const tile = tilesRef.current?.[idx]?.current;
-    if (tile == null) return;
+	const highlightTile = (idx: number) => {
+		const tile = tilesRef.current?.[idx]?.current;
+		if (tile == null) return;
 
-    tile?.classList.add('Tile--highlight');
+		tile?.classList.add('Tile--highlight');
 
-    setTimeout(() => {
-      tile?.classList.remove('Tile--highlight')
-    }, 700)
-  }
+		setTimeout(() => {
+			tile?.classList.remove('Tile--highlight');
+		}, 700);
+	};
 
-  const highlightNeighbours = (tileIdx: number) => {
-    const neighbours = [
-      tileIdx - 1,
-      tileIdx + 1,
-      tileIdx - cols,
-      tileIdx + cols,
-      tileIdx - cols - 1,
-      tileIdx - cols + 1,
-      tileIdx + cols - 1,
-      tileIdx + cols + 1,
-    ].filter((x) => {
-      return (
-        x >= 0 && // tile is not less than 0
-        x < (cols * rows) && // tile is not more than total
-        Math.abs((x % cols) - (tileIdx % cols)) <= 1 // tile is not wrapped
-      );
-    });
-    
-    hightlightTile(tileIdx);
+	const highlightNeighbours = (tileIdx: number) => {
+		const neighbours = [
+			tileIdx - 1,
+			tileIdx + 1,
+			tileIdx - cols,
+			tileIdx + cols,
+			tileIdx - cols - 1,
+			tileIdx - cols + 1,
+			tileIdx + cols - 1,
+			tileIdx + cols + 1,
+		].filter((x) => {
+			return (
+				x >= 0 && // tile is not less than 0
+				x < cols * rows && // tile is not more than total
+				Math.abs((x % cols) - (tileIdx % cols)) <= 1 // tile is not wrapped
+			);
+		});
 
-    shuffleArray(neighbours)
-      .slice(0,2)
-      .forEach((nIdx) => {
-        hightlightTile(nIdx);
-      })
-  }
+		highlightTile(tileIdx);
 
-  const handleOnClick = (idx: number) => {
-    setTilesToggled((prev) => !prev);
+		shuffleArray(neighbours)
+			.slice(0, 2)
+			.forEach((nIdx) => {
+				highlightTile(nIdx);
+			});
+	};
 
-    if (!tilesToggled) {
-      setSlowLoad(true);
-      setQuoteIdx((prev) => (prev + 1) % quotes.length);
-      setTimeout(() => {
-        setSlowLoad(false)
-      }, 2000);
-    } else {
-      setHideControls(false);
-    }
+	const handleOnClick = (idx: number) => {
+		setTilesToggled((prev) => !prev);
 
-    anime({
-      targets: ".Tile",
-      scale: [
-        {value: 0.7, easing: 'easeOutSine', duration: 500},
-        {value: 1, easing: 'easeInOutQuad', duration: 300}
-      ],
-      opacity: tilesToggled ? 1 : 0,
-      delay: anime.stagger(25, {
-        grid: [cols, rows],
-        from: idx,
-      })
-    })
-  }
+		if (!tilesToggled) {
+			setSlowLoad(true);
+			setQuoteIdx((prev) => (prev + 1) % quotes.length);
+			setTimeout(() => {
+				setSlowLoad(false);
+			}, 2000);
+		} else {
+			setHideControls(false);
+		}
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'ArrowLeft') {
-      handleQuotePrevious();
-    } else if (e.key === 'ArrowRight') {
-      handleQuoteNext();
-    }
-  };
+		anime({
+			targets: '.Tile',
+			scale: [
+				{ value: 0.7, easing: 'easeOutSine', duration: 500 },
+				{ value: 1, easing: 'easeInOutQuad', duration: 300 },
+			],
+			opacity: tilesToggled ? 1 : 0,
+			delay: anime.stagger(25, {
+				grid: [cols, rows],
+				from: idx,
+			}),
+		});
+	};
 
-  const handleMouseMove = (e: MouseEvent) => {
-    const imageX = ((e.clientX / windowWidth) - 0.5) * 20;
-    const imageY = ((e.clientY / windowHeight) - 0.5) * 20;
+	const handleKeyDown = (e: KeyboardEvent) => {
+		if (e.key === 'ArrowLeft') {
+			handleQuotePrevious();
+		} else if (e.key === 'ArrowRight') {
+			handleQuoteNext();
+		}
+	};
 
-    setImagePosition({
-      x: 50 + imageX,
-      y: 50 + imageY
-    })
-  }
+	const handleMouseMove = (e: MouseEvent) => {
+		const imageX = (e.clientX / windowWidth - 0.5) * 20;
+		const imageY = (e.clientY / windowHeight - 0.5) * 20;
 
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('mousemove', handleMouseMove);
+		setImagePosition({
+			x: 50 + imageX,
+			y: 50 + imageY,
+		});
+	};
 
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('mousemove', handleMouseMove);
-    }
-  }, []);
+	useEffect(() => {
+		document.addEventListener('keydown', handleKeyDown);
+		document.addEventListener('mousemove', handleMouseMove);
 
-  return (
-    <div className="Tiles" style={style}>
-      <TilesBackground
-        urls={urls}
-        imageIdx={imageIdx}
-        imagePosition={imagePosition}
-        backgroundToggled={backgroundToggled}
-      />
+		return () => {
+			document.removeEventListener('keydown', handleKeyDown);
+			document.removeEventListener('mousemove', handleMouseMove);
+		};
+	}, []);
 
-      <div className={`Tiles__main ${tilesToggled ? 'Tiles__main--toggled' : ''} ${!backgroundToggled ? 'Tiles__main--gradient' : ''}`}>
-        {
-          Array.from(Array(totalTiles)).map((_, i) => {
-            return <div ref={tilesRef.current[i]} key={`tile_${i}`} className="Tile" onMouseOver={() => highlightNeighbours(i)} onClick={() => handleOnClick(i)}></div>
-          })
-        }
-      </div>
+	return (
+		<div className="Tiles" style={style}>
+			<TilesBackground
+				urls={urls}
+				imageIdx={imageIdx}
+				imagePosition={imagePosition}
+				backgroundToggled={backgroundToggled}
+			/>
 
-      <TileQuotes
-        tilesToggled={tilesToggled}
-        fade={fade}
-        currentQuote={currentQuote}
-      />
+			<div
+				className={`Tiles__main ${tilesToggled ? 'Tiles__main--toggled' : ''} ${
+					!backgroundToggled ? 'Tiles__main--gradient' : ''
+				}`}
+			>
+				{Array.from(Array(totalTiles)).map((_, i) => {
+					return (
+						<div
+							ref={tilesRef.current[i]}
+							key={`tile_${i}`}
+							className="Tile"
+							onMouseOver={() => highlightNeighbours(i)}
+							onClick={() => handleOnClick(i)}
+						></div>
+					);
+				})}
+			</div>
 
-      <TileControls
-        tilesToggled={tilesToggled}
-        hideControls={hideControls}
-        slowLoad={slowLoad}
-        handleQuoteNext={handleQuoteNext}
-        handleQuotePrevious={handleQuotePrevious}
-        toggleControls={toggleControls}
-        toggleBackground={toggleBackground}
-        toggleFullScreen={toggleFullScreen}
-      />
-    </div>
-  );
+			<TileQuotes
+				tilesToggled={tilesToggled}
+				fade={fade}
+				currentQuote={currentQuote}
+			/>
+
+			<TileControls
+				tilesToggled={tilesToggled}
+				hideControls={hideControls}
+				slowLoad={slowLoad}
+				handleQuoteNext={handleQuoteNext}
+				handleQuotePrevious={handleQuotePrevious}
+				toggleControls={toggleControls}
+				toggleBackground={toggleBackground}
+				toggleFullScreen={toggleFullScreen}
+			/>
+		</div>
+	);
 }
